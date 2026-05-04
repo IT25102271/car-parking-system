@@ -1,0 +1,65 @@
+[
+  {
+    "role": "ADMIN",
+    "userId": "A001",
+    "name": "System Admin",
+    "email": "admin@carpark.com",
+    "password": "admin123",
+    "phone": "0771000000",
+    "adminCode": "ADM-001"
+  },
+  {
+    "role": "USER",
+    "userId": "U001",
+    "name": "Kamal Perera",
+    "email": "kamal@carpark.com",
+    "password": "user123",
+    "phone": "0772000001",
+    "licenseNumber": "B2345678"
+  },
+  {
+    "role": "USER",
+    "userId": "U002",
+    "name": "Nimali Silva",
+    "email": "nimali@carpark.com",
+    "password": "user123",
+    "phone": "0772000002",
+    "licenseNumber": "C9876543"
+  },
+  {
+    "role": "USER",
+    "userId": "U003",
+    "name": "Sanjaya Kumara",
+    "email": "sanjaya@carpark.com",
+    "password": "user123",
+    "phone": "0772000003",
+    "licenseNumber": "D1122334"
+  },
+  {
+    "role": "USER",
+    "userId": "U004",
+    "name": "Priya Wijesinghe",
+    "email": "priya@carpark.com",
+    "password": "user123",
+    "phone": "0772000004",
+    "licenseNumber": "E5566778"
+  },
+  {
+    "role": "USER",
+    "userId": "U005",
+    "name": "Lakshan Jayawardene",
+    "email": "lakshan@carpark.com",
+    "password": "user123",
+    "phone": "0772000005",
+    "licenseNumber": "F9988776"
+  },
+  {
+    "role": "ADMIN",
+    "userId": "A002",
+    "name": "Support Admin",
+    "email": "support@carpark.com",
+    "password": "admin123",
+    "phone": "0771000001",
+    "adminCode": "ADM-002"
+  }
+]

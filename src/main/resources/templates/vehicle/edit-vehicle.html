@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::title}, ~{::main})}">
+<head><title>Edit Vehicle</title></head>
+<body>
+<main>
+    <form th:action="@{/user/vehicles/update}" method="post" class="mx-auto max-w-2xl space-y-4">
+        <input type="hidden" name="vehicleId" th:value="${vehicle.vehicleId}" />
+        <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+                <label class="mb-1 block text-xs text-app-muted">Plate number</label>
+                <input type="text" name="plateNumber" th:value="${vehicle.plateNumber}" required
+                       class="w-full rounded border border-app-border bg-app-panel2 px-3 py-2 text-sm focus:border-app-accent focus:outline-none" />
+            </div>
+            <div>
+                <label class="mb-1 block text-xs text-app-muted">Type</label>
+                <select name="type" class="w-full rounded border border-app-border bg-app-panel2 px-3 py-2 text-sm focus:border-app-accent focus:outline-none">
+                    <option th:selected="${vehicle.type == 'CAR'}">CAR</option>
+                    <option th:selected="${vehicle.type == 'BIKE'}">BIKE</option>
+                    <option th:selected="${vehicle.type == 'VAN'}">VAN</option>
+                </select>
+            </div>
+            <div>
+                <label class="mb-1 block text-xs text-app-muted">Make</label>
+                <input type="text" name="make" th:value="${vehicle.make}" required
+                       class="w-full rounded border border-app-border bg-app-panel2 px-3 py-2 text-sm focus:border-app-accent focus:outline-none" />
+            </div>
+            <div>
+                <label class="mb-1 block text-xs text-app-muted">Model</label>
+                <input type="text" name="model" th:value="${vehicle.model}" required
+                       class="w-full rounded border border-app-border bg-app-panel2 px-3 py-2 text-sm focus:border-app-accent focus:outline-none" />
+            </div>
+            <div>
+                <label class="mb-1 block text-xs text-app-muted">Color</label>
+                <input type="text" name="color" th:value="${vehicle.color}" required
+                       class="w-full rounded border border-app-border bg-app-panel2 px-3 py-2 text-sm focus:border-app-accent focus:outline-none" />
+            </div>
+            <div class="sm:col-span-2">
+                <label class="mb-1 block text-xs text-app-muted">Vehicle image URL</label>
+                <input type="url" name="vehicleUrl" th:value="${vehicle.vehicleUrl}" placeholder="https://..."
+                       class="w-full rounded border border-app-border bg-app-panel2 px-3 py-2 text-sm focus:border-app-accent focus:outline-none" />
+            </div>
+        </div>
+        <div class="flex gap-2 border-t border-app-border pt-4">
+            <button type="submit" class="rounded bg-app-accent px-3 py-2 text-xs font-semibold text-white hover:bg-app-accent/90">Update</button>
+            <a th:href="@{/user/vehicles}" class="rounded px-3 py-2 text-xs font-medium text-app-muted ring-1 ring-app-border hover:text-app-text">Cancel</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>

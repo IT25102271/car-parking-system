@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::title}, ~{::main})}">
+<head><title>User Dashboard</title></head>
+<body>
+<main>
+    <section class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <a th:href="@{/user/slots}" class="rounded-lg border border-app-border bg-app-panel p-5">
+            <p class="text-xs uppercase tracking-[0.13em] text-app-muted">Search</p>
+            <h3 class="mt-2 text-lg font-bold">Available Slots</h3>
+            <p class="mt-2 text-sm text-app-muted">Find a free slot by floor and type.</p>
+        </a>
+        <a th:href="@{/user/reservations/book}" class="rounded-lg border border-app-border bg-app-panel p-5">
+            <p class="text-xs uppercase tracking-[0.13em] text-app-muted">Booking</p>
+            <h3 class="mt-2 text-lg font-bold">Book a Slot</h3>
+            <p class="mt-2 text-sm text-app-muted">Reserve parking in under 30 seconds.</p>
+        </a>
+        <a th:href="@{/user/vehicles}" class="rounded-lg border border-app-border bg-app-panel p-5">
+            <p class="text-xs uppercase tracking-[0.13em] text-app-muted">Vehicles</p>
+            <h3 class="mt-2 text-lg font-bold">My Vehicles</h3>
+            <p class="mt-2 text-sm text-app-muted">Update your vehicles and images.</p>
+        </a>
+        <a th:href="@{/user/bills}" class="rounded-lg border border-app-border bg-app-panel p-5">
+            <p class="text-xs uppercase tracking-[0.13em] text-app-muted">Payments</p>
+            <h3 class="mt-2 text-lg font-bold">My Bills</h3>
+            <p class="mt-2 text-sm text-app-muted">Track charges and payment status.</p>
+        </a>
+    </section>
+
+    <section class="mt-6 rounded-lg border border-app-border bg-app-panel p-6">
+        <p class="text-sm text-app-muted">Need parking now? Start with slot availability and complete booking instantly.</p>
+        <a th:href="@{/user/slots}" class="mt-4 inline-flex rounded bg-app-accent px-3 py-2 text-xs font-semibold text-white">Browse slots</a>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,16 @@
+[
+  {
+    "billId": "B001",
+    "reservationId": "R002",
+    "userId": "U002",
+    "slotNumber": "B-11",
+    "vehiclePlate": "BAX-7788",
+    "durationHours": 3,
+    "ratePerHour": 70.0,
+    "totalAmount": 210.0,
+    "discount": 10.0,
+    "finalAmount": 200.0,
+    "status": "UNPAID",
+    "createdDate": "2026-05-01"
+  }
+]
