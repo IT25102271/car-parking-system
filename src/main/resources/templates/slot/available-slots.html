@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::title}, ~{::main})}">
+<head><title>Available Slots</title></head>
+<body>
+<main>
+    <section class="mb-5 flex flex-wrap items-center justify-between gap-3">
+        <h3 class="text-xl font-semibold">Available slots</h3>
+        <p class="text-xs text-app-muted">Pick an open bay, then continue to book.</p>
+    </section>
+
+    <p th:if="${slots.isEmpty()}" class="text-sm text-app-muted">No available slots.</p>
+
+    <div th:if="${!slots.isEmpty()}" class="space-y-8">
+        <section th:each="floorEntry : ${slotsByFloor}"
+                 class="overflow-hidden rounded-xl border border-app-border bg-[#101014]">
+            <header class="flex flex-wrap items-center justify-between gap-2 border-b border-app-border bg-app-panel2 px-4 py-2.5">
+                <h4 class="text-sm font-semibold text-app-text" th:text="${floorEntry.key}">Ground</h4>
+                <p class="text-[11px] text-app-muted">
+                    <span th:text="${#lists.size(floorEntry.value)}">0</span> open
+                </p>
+            </header>
+
+            <div class="relative px-3 py-4 sm:px-5">
+                <div class="mb-3 flex items-center gap-2">
+                    <div class="h-0 flex-1 border-t border-dashed border-yellow-500/45"></div>
+                    <span class="shrink-0 text-[9px] font-semibold uppercase tracking-[0.2em] text-yellow-500/70">Drive aisle</span>
+                    <div class="h-0 flex-1 border-t border-dashed border-yellow-500/45"></div>
+                </div>
+
+                <div class="flex flex-wrap items-stretch gap-2 sm:gap-2.5">
+                    <div th:each="slot : ${floorEntry.value}"
+                         class="flex min-h-[5rem] w-[calc(50%-0.25rem)] flex-col justify-between rounded border border-app-border border-l-[3px] border-l-emerald-500 bg-app-panel p-2 sm:w-[calc(33.333%-0.42rem)] md:w-[calc(25%-0.48rem)] lg:w-[calc(20%-0.52rem)] xl:w-[calc(16.666%-0.52rem)]">
+                        <div>
+                            <p class="text-center font-mono text-[13px] font-bold tracking-tight" th:text="${slot.slotNumber}">A-01</p>
+                            <p class="mt-0.5 text-center text-[10px] text-app-accent" th:text="${slot.type}">CAR</p>
+                            <p class="mt-1 text-center text-[10px] tabular-nums text-app-muted"
+                               th:text="'LKR ' + ${slot.ratePerHour} + '/hr'">LKR 120/hr</p>
+                        </div>
+                        <a th:href="@{/user/reservations/book(slotId=${slot.slotId})}"
+                           class="mt-2 block rounded bg-app-accent py-1.5 text-center text-[11px] font-semibold text-white">
+                            Book
+                        </a>
+                    </div>
+                </div>
+
+                <div class="mt-4 flex items-center gap-2">
+                    <div class="h-0 flex-1 border-t border-dashed border-white/[0.12]"></div>
+                    <span class="text-[9px] uppercase tracking-[0.15em] text-app-muted">Structure / wall</span>
+                    <div class="h-0 flex-1 border-t border-dashed border-white/[0.12]"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+</body>
+</html>

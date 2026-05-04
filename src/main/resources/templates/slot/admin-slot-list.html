@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::title}, ~{::main})}">
+<head><title>Slots</title></head>
+<body>
+<main>
+    <section class="mb-5 flex flex-wrap items-center justify-between gap-3">
+        <h3 class="text-xl font-semibold">Parking slots</h3>
+        <div class="flex flex-wrap items-center gap-4 text-[11px] text-app-muted">
+            <span class="flex items-center gap-1.5"><span class="h-3 w-1 rounded-sm bg-emerald-400/90"></span> Free</span>
+            <span class="flex items-center gap-1.5"><span class="h-3 w-1 rounded-sm bg-amber-400/90"></span> Taken</span>
+            <span class="flex items-center gap-1.5"><span class="h-3 w-1 rounded-sm bg-orange-400/90"></span> Closed</span>
+        </div>
+        <a th:href="@{/admin/slots/add}"
+           class="rounded-lg bg-app-accent px-4 py-2 text-sm font-semibold text-white">Add slot</a>
+    </section>
+
+    <div th:if="${slots.isEmpty()}"
+         class="rounded-lg border border-dashed border-app-border py-14 text-center text-sm text-app-muted">
+        No slots available.
+    </div>
+
+    <div th:if="${!slots.isEmpty()}" class="space-y-8">
+        <section th:each="floorEntry : ${slotsByFloor}"
+                 class="overflow-hidden rounded-xl border border-app-border bg-[#101014]">
+            <header class="flex flex-wrap items-center justify-between gap-2 border-b border-app-border bg-app-panel2 px-4 py-2.5">
+                <h4 class="text-sm font-semibold text-app-text" th:text="${floorEntry.key}">Ground</h4>
+                <p class="text-[11px] text-app-muted">
+                    <span th:text="${#lists.size(floorEntry.value)}">0</span> bays
+                </p>
+            </header>
+
+            <div class="relative px-3 py-4 sm:px-5">
+                <!-- Drive aisle (top) -->
+                <div class="mb-3 flex items-center gap-2">
+                    <div class="h-0 flex-1 border-t border-dashed border-yellow-500/45"></div>
+                    <span class="shrink-0 text-[9px] font-semibold uppercase tracking-[0.2em] text-yellow-500/70">Drive aisle</span>
+                    <div class="h-0 flex-1 border-t border-dashed border-yellow-500/45"></div>
+                </div>
+
+                <!-- Bay row facing the aisle -->
+                <div class="flex flex-wrap items-stretch gap-2 sm:gap-2.5">
+                    <div th:each="slot : ${floorEntry.value}"
+                         class="flex min-h-[5.5rem] w-[calc(50%-0.25rem)] flex-col justify-between rounded border border-app-border bg-app-panel p-2 sm:w-[calc(33.333%-0.42rem)] md:w-[calc(25%-0.48rem)] lg:w-[calc(20%-0.52rem)] xl:w-[calc(16.666%-0.52rem)]"
+                         th:classappend="${slot.status == 'AVAILABLE'} ? ' border-l-[3px] border-l-emerald-500' :
+                         (${slot.status == 'OCCUPIED'} ? ' border-l-[3px] border-l-amber-500' : ' border-l-[3px] border-l-orange-500')">
+
+                        <div>
+                            <p class="text-center font-mono text-[13px] font-bold tracking-tight" th:text="${slot.slotNumber}">A-01</p>
+                            <p class="mt-0.5 text-center text-[10px] text-app-accent" th:text="${slot.type}">CAR</p>
+                            <p class="mt-1 text-center text-[10px] tabular-nums text-app-muted"
+                               th:text="'LKR ' + ${slot.ratePerHour} + '/hr'">LKR 120/hr</p>
+                        </div>
+
+                        <div class="mt-2 flex justify-center gap-1.5 text-[10px]">
+                            <a th:href="@{/admin/slots/edit/{id}(id=${slot.slotId})}"
+                               class="rounded border border-app-border px-2 py-1 text-app-muted">Edit</a>
+                            <form th:action="@{/admin/slots/delete/{id}(id=${slot.slotId})}" method="post" class="inline">
+                                <button type="submit"
+                                        class="rounded border border-red-500/35 px-2 py-1 text-red-300/95">Del</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 flex items-center gap-2">
+                    <div class="h-0 flex-1 border-t border-dashed border-white/[0.12]"></div>
+                    <span class="text-[9px] uppercase tracking-[0.15em] text-app-muted">Structure / wall</span>
+                    <div class="h-0 flex-1 border-t border-dashed border-white/[0.12]"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+</body>
+</html>
