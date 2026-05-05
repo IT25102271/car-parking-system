@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::title}, ~{::main})}">
+<head><title>Apply Discount</title></head>
+<body>
+<main class="mx-auto max-w-lg">
+    <p class="text-sm text-app-muted"><span class="text-app-text">Bill</span> <span class="font-mono text-xs" th:text="${bill.billId}"></span></p>
+    <p class="text-sm text-app-muted"><span class="text-app-text">Current amount</span> <span class="font-medium text-app-text" th:text="'LKR ' + ${bill.finalAmount}"></span></p>
+    <form th:action="@{/admin/bills/discount}" method="post" class="mt-6 space-y-4">
+        <input type="hidden" name="billId" th:value="${bill.billId}" />
+        <div>
+            <label class="mb-1 block text-xs text-app-muted">Discount amount</label>
+            <input type="number" step="0.01" name="discount" required
+                   class="w-full rounded border border-app-border bg-app-panel2 px-3 py-2 text-sm focus:border-app-accent focus:outline-none" />
+        </div>
+        <div class="flex gap-2">
+            <button type="submit" class="rounded bg-app-accent px-3 py-2 text-xs font-semibold text-white hover:bg-app-accent/90">Apply</button>
+            <a th:href="@{/admin/bills}" class="rounded px-3 py-2 text-xs font-medium text-app-muted ring-1 ring-app-border hover:text-app-text">Cancel</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>
