@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::title}, ~{::main})}">
+<head><title>Bills</title></head>
+<body>
+<main>
+    <div class="overflow-x-auto rounded-sm border border-app-border bg-app-panel">
+        <table class="min-w-full text-[15px] tabular-nums">
+            <thead class="border-b border-app-border bg-app-panel2">
+            <tr>
+                <th class="px-5 py-3.5 text-left text-sm font-semibold uppercase tracking-wide text-app-muted">Bill</th>
+                <th class="px-5 py-3.5 text-left text-sm font-semibold uppercase tracking-wide text-app-muted">Reservation</th>
+                <th class="px-5 py-3.5 text-left text-sm font-semibold uppercase tracking-wide text-app-muted">User</th>
+                <th class="px-5 py-3.5 text-left text-sm font-semibold uppercase tracking-wide text-app-muted">Amount</th>
+                <th class="px-5 py-3.5 text-left text-sm font-semibold uppercase tracking-wide text-app-muted">Status</th>
+                <th class="px-5 py-3.5 text-right text-sm font-semibold uppercase tracking-wide text-app-muted">Actions</th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-app-border">
+            <tr th:each="bill : ${bills}" class="hover:bg-app-panel2/70">
+                <td class="px-5 py-3.5 font-mono text-sm" th:text="${bill.billId}"></td>
+                <td class="px-5 py-3.5 font-mono text-sm" th:text="${bill.reservationId}"></td>
+                <td class="px-5 py-3.5" th:text="${bill.userId}"></td>
+                <td class="px-5 py-3.5" th:text="'LKR ' + ${bill.finalAmount}"></td>
+                <td class="px-5 py-3.5">
+                    <span class="rounded px-2 py-0.5 text-xs font-medium text-app-accent ring-1 ring-app-accent/25"
+                          th:text="${bill.status}"></span>
+                </td>
+                <td class="px-5 py-3.5 text-right">
+                    <a th:href="@{/admin/bills/discount/{id}(id=${bill.billId})}"
+                       class="mr-2 inline-block rounded px-2 py-1 text-xs font-medium text-amber-400 ring-1 ring-amber-500/30 hover:bg-amber-500/10">Discount</a>
+                    <form th:action="@{/admin/bills/delete/{id}(id=${bill.billId})}" method="post" class="inline">
+                        <button type="submit"
+                                class="rounded px-2 py-1 text-xs font-medium text-red-400 ring-1 ring-red-500/30 hover:bg-red-500/10">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>
