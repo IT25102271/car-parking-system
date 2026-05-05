@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::title}, ~{::main})}">
+<head><title>Book Slot</title></head>
+<body>
+<main>
+    <form th:action="@{/user/reservations/book}" method="post" class="mx-auto max-w-3xl space-y-4">
+        <div class="grid gap-4 md:grid-cols-2">
+            <div>
+                <label class="mb-1 block text-xs text-app-muted">Vehicle</label>
+                <select name="vehiclePlate" class="w-full rounded border border-app-border bg-app-panel2 px-3 py-2 text-sm focus:border-app-accent focus:outline-none">
+                    <option th:each="v : ${vehicles}" th:value="${v.plateNumber}" th:text="${v.plateNumber} + ' - ' + ${v.make}"></option>
+                </select>
+            </div>
+            <div>
+                <label class="mb-1 block text-xs text-app-muted">Slot</label>
+                <select name="slotId" class="w-full rounded border border-app-border bg-app-panel2 px-3 py-2 text-sm focus:border-app-accent focus:outline-none">
+                    <option th:each="s : ${slots}" th:value="${s.slotId}" th:selected="${preselectedSlotId != null && #strings.equals(preselectedSlotId, s.slotId)}" th:text="${s.slotNumber} + ' (' + ${s.type} + ') - LKR ' + ${s.ratePerHour} + '/hr'"></option>
+                </select>
+            </div>
+            <div>
+                <label class="mb-1 block text-xs text-app-muted">Reservation date</label>
+                <input type="date" name="reservationDate" required class="w-full rounded border border-app-border bg-app-panel2 px-3 py-2 text-sm focus:border-app-accent focus:outline-none" />
+            </div>
+            <div>
+                <label class="mb-1 block text-xs text-app-muted">Start time</label>
+                <input type="time" name="startTime" required class="w-full rounded border border-app-border bg-app-panel2 px-3 py-2 text-sm focus:border-app-accent focus:outline-none" />
+            </div>
+            <div class="md:col-span-2">
+                <label class="mb-1 block text-xs text-app-muted">Duration hours</label>
+                <input type="number" name="durationHours" min="1" max="24" required class="w-full rounded border border-app-border bg-app-panel2 px-3 py-2 text-sm focus:border-app-accent focus:outline-none" />
+            </div>
+        </div>
+        <div class="flex gap-2 border-t border-app-border pt-4">
+            <button type="submit" class="rounded bg-app-accent px-3 py-2 text-xs font-semibold text-white hover:bg-app-accent/90">Confirm booking</button>
+            <a th:href="@{/user/reservations}" class="rounded px-3 py-2 text-xs font-medium text-app-muted ring-1 ring-app-border hover:text-app-text">Cancel</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>
